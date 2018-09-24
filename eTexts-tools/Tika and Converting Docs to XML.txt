@@ -1,0 +1,67 @@
+From: Chris Tomlinson <chris.j.tomlinson@gmail.com>
+Subject: Tika and Converting Docs to XML
+Date: June 19, 2013 9:12:22 PM EDT
+To: Jeff Wallman <jeffwallman@tbrc.org>
+
+Dear Jeff,
+
+A status report on Tika.
+
+I have built a version of eXist-db based on trunk rev 18566 - the current. I had to fix a couple of configuration items to build the war file and submitted those to the eXist-db svn. The Tika interface in eXist is described here:
+
+Content Extraction and Binary Resource Indexing
+
+and the version of eXist-db that I'm working with has the content extraction module included.
+
+I've tried it out with the Longchenpa Collected Works as an example. These are Sambhota dedris font msword doc format. 
+
+I am opening the original msword doc in Libre Office 4.0.4 on Windows XP and save as rtf. Then open in UDP 13.0.2 on Windows XP and saves as UTF-8 (MS compatible) unicode rtf.
+
+Using the Libre Office and saving in rtf preserves the paragraph information that is discarded by the Apple textutils program. I tried MS Office 2011 for Mac and it generated an rtf that didn't work in UDP - probably a Mac vs Windows encoding issue. (Libre Office has some difficultiy with large files so I may have to try MS Office 2013 to see how it handles the files vis a vis UDP.)
+
+I then extract the metadata from the original msword doc and the unicode content from the UDP generated rtf using the Tika operations.
+
+I've attached an example document converted with Tika.
+
+The converted document can be indexed and searched with RR or as TEI or whatever conversion is needed.
+
+It is easy to use:
+
+xmldb:store()
+
+to store the xs:base64Binary doc and rtf files into the db as well if need be. I'll try the index examples linking the index into the binary docs next and see what how that works.
+
+Here's the XQuery that I used to convert docs:
+
+====
+xquery version "1.0";
+
+import module namespace cx="http://exist-db.org/xquery/contentextraction"
+at "java:org.exist.contentextraction.xquery.ContentExtractionModule";
+
+declare namespace u="http://exist-db.org/xquery/util";
+declare namespace f="http://exist-db.org/xquery/file";
+declare namespace x="http://exist-db.org/xquery/xmldb";
+declare namespace html="http://www.w3.org/1999/xhtml";
+
+let $collNm := "eTexts"
+let $cPath := x:create-collection("/db", $collNm)
+let $cUri := "/db/eTexts/"
+
+let $docPath := "/Users/chris/Desktop/lcw-01-03.doc"
+let $rtfPath := "/Users/chris/Desktop/lcw-01-03-word-libre-udp.rtf"
+let $docNm := "lcw-01-03.xml"
+let $rtfMime := "application/rtf"
+let $docMime := "application/msword"
+let $rtfFile := f:read-binary($rtfPath)
+let $docFile := f:read-binary($docPath)
+let $metaData := cx:get-metadata($docFile)
+let $uniData := cx:get-metadata-and-content($rtfFile)
+let $doc := <doc>{$metaData//html:head, $uniData//html:body}</doc>
+let $stored := x:store($cUri, $docNm, $doc)
+return
+    $stored
+====
+
+Regards,
+Chris
