@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red16\green73\blue188;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0\fs24 \cf2 From: Potala Software <tibet@leighb.com>\
+Subject: Re: New version of UDP = 13.02.05 - fixes RTF paste with small fonts\
+Date: July 4, 2013 7:42:24 AM CDT\
+To: Chris Tomlinson <chris.j.tomlinson@gmail.com>\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf2 \
+\pard\pardeftab720
+\cf2 Hi Chris,\
+\
+\pard\pardeftab720
+\cf3 Wonderful! I look forward to running a batch script over the corpus of TibetDoc files.\
+\pard\pardeftab720
+\cf2 \
+If you run the following, you get what you want (as long as "Allow non-breaking Tibetan spaces in Unicode" is off - I still have to fix that!):\
+\
+c:\\unicdocp\\udp -x rtf 001-498.dct\
+c:\\unicdocp\\udp -x rtf 001-498.rtf\
+\
+Here's your 2 line batch script. \'a0It assumes that udp.exe is in c:\\unicdocp and you have a folder with only the dct files in it that you want to convert:\
+\
+for %%x in (*.dct) do c:\\unicdocp\\udp.exe -x rtf %%x\
+for %%x in (*.rtf) do c:\\unicdocp\\udp.exe -x rtf %%x\
+\
+Don't look at the output RTF files with UDP - that'll just add a second pair of chevrons (I have to fix that as well). \'a0But if you look at the output RTF files with wordpad (aka "write" from the command line), they should be fine.\
+\
+\
+\
+\pard\pardeftab720
+\cf3 Thank you and have a wonderful weekend of teaching,\
+\pard\pardeftab720
+\cf2 \
+Thanks!\
+\
+Leigh\
+}

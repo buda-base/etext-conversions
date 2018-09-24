@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title type="derived">rdo rje lu gyu gyud</title>
+                <author/>
+            </titleStmt>
+            <publicationStmt>
+                <distributor>Karma Delek</distributor>
+                <idno type="TBRC_RID">UT1CT0074</idno>
+                <availability status="free">
+                    <licence target="http://creativecommons.org/licenses/by/3.0/" when="2014-01-01">
+                        The Creative Commons Attribution 3.0 Unported (CC BY 3.0) Licence
+                        applies to this document.
+                        The licence was added on January 1, 2014.
+                    </licence>
+                </availability>
+                <date when="1968">1968</date>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>
+                    <idno type="TBRC_RID">W1KG384</idno>
+                </bibl>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div><milestone unit="page"/>Here be page 1 text.<milestone unit="page"/>And here is page 2 text.</div>
+        </body>
+    </text>
+</TEI>
